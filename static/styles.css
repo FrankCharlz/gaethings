@@ -1,0 +1,28 @@
+
+body {
+    font-family: 'Open Sans' ;
+}
+
+h2 {
+    font-size: 19px;
+    color: #384B56;
+    font-weight: 600;
+}
+
+.news-list > div {
+    border-bottom: 1px solid #e7e7e7;
+    padding-bottom: 8px;
+}
+
+
+.news-list div:last-child {
+    border-bottom-width: 0px;
+}
+
+.my-pagination {
+    background: #f8f8f8;
+    border: 0px solid #e7e7e7;
+    border-bottom-width: 1px;
+    border-top-width: 1px;
+    padding: 8px;
+}
