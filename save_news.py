@@ -32,7 +32,7 @@ class SaveNews(webapp2.RequestHandler):
             n.body = body
             n.author = author
             n.tags = tags
-            n.id = randint(999999999)#God doesnt play dice, I do
+            n.rId = randint(0, 999999999)#God doesnt play dice, I do
             n.put()
             response['success'] = 1
             response['message'] = 'News added successfully'

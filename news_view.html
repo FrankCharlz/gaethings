@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% autoescape true %}
 <html>
 <head>
     {% include 'head.html' %}
@@ -12,10 +13,12 @@
     <div class="col-md-7 col-xs-12 news-view">
         {% for item in news %}
         <div>
-            <h2>{{ item.title|title }}</h2></a>
-            <span class="by-line"><code>@{{item.author|default('Hamma')}}</code></span>
-            <span class="news-time">{{item.date}}</span>
-            <p>{{ item.body}}</p>
+            <h2>{{ item.title|title }}</h2>
+            <i>
+            by <span class="by-line"> {{item.author}} </span> /
+            <span class="by-line">{{ item.date.strftime('%B %d, %Y %H:%M')}}</span>
+            </i>
+            <p>{{ item.body|safe}}</p>
             <p class="news-tags"><code>#{{item.tags}}</code></p>
         </div>
         {% endfor %}
@@ -34,3 +37,4 @@
 </div>
 {% include 'footer.html' %}</body>
 </html>
+{% endautoescape %}

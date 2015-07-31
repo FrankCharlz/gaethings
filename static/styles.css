@@ -34,8 +34,14 @@ h2 {
     }
 
 .i-menu li:hover {
-    background: rgba(16, 178, 124, 0.12);
+    color: #000;
+    background: rgba(16, 178, 124, 0.1);
 }
+
+.by-line {
+    font-weight: bold;
+    color: #106B4D;
+    }
 
 
 

@@ -31,7 +31,7 @@ def iRandom():
 
 
 class MainPage(webapp2.RequestHandler):
-    NEWS_TO_QUERY = 6
+    NEWS_TO_QUERY = 2
     def get(self):
         start_at = self.request.get('start')
         start_at = 0 if (not start_at) else int(start_at)#if start not number janga
@@ -69,10 +69,7 @@ class ViewNews(webapp2.RequestHandler):
 
 class NewsForm(webapp2.RequestHandler):
     def get(self):
-
-        template_values = {
-        }
-
+        template_values = {}
         template = JINJA_ENVIRONMENT.get_template('news_form.html')
         self.response.write(template.render(template_values))
 
