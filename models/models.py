@@ -15,3 +15,12 @@ class Comment(ndb.Model):
     news_id = ndb.IntegerProperty()#saves as key to link with news entry
     date = ndb.DateTimeProperty(auto_now_add=True)
 
+
+class User(ndb.Model):
+    id = ndb.IntegerProperty()
+    name = ndb.StringProperty()
+    email = ndb.StringProperty()
+    password = ndb.StringProperty()
+    level = ndb.IntegerProperty()
+    profile_photo_key = ndb.BlobKeyProperty()
+    date = ndb.DateTimeProperty(auto_now_add=True)

@@ -1,25 +1,37 @@
 import os
-import urllib
+from random import randint
 
 import jinja2
-import urlparse
 import webapp2
-import json
-
 from google.appengine.ext import ndb
-from google.appengine.ext import blobstore
-from datetime import datetime
-from save_news import SaveNews
+from webapp2_extras import sessions
 
+from handlers.save_news import SaveNews
 from models.models import News
 from models.models import Comment
-
-from random import randint
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
+
+
+class BaseHandler(webapp2.RequestHandler):
+    def dispatch(self):
+        # Get a session store for this request.
+        self.session_store = sessions.get_store(request=self.request)
+
+        try:
+            # Dispatch the request.
+            webapp2.RequestHandler.dispatch(self)
+        finally:
+            # Save all sessions.
+            self.session_store.save_sessions(self.response)
+
+    @webapp2.cached_property
+    def session(self):
+        # Returns a session using the default cookie key.
+        return self.session_store.get_session()
 
 DEFAULT_GUESTBOOK_NAME = 'default_guestbook'
 
@@ -30,7 +42,7 @@ def iRandom():
     return randint(100000,999999)
 
 
-class MainPage(webapp2.RequestHandler):
+class MainPage(BaseHandler):
     NEWS_TO_QUERY = 6
     def get(self):
         start_at = self.request.get('start')
@@ -45,12 +57,14 @@ class MainPage(webapp2.RequestHandler):
             'prev_story': (start_at - self.NEWS_TO_QUERY)
         }
 
+        self.session['username'] = 'Frank Charlz'
+
         template = JINJA_ENVIRONMENT.get_template('index.html')
         self.response.write(template.render(template_values))
 
 
 
-class ViewNews(webapp2.RequestHandler):
+class ViewNews(BaseHandler):
     def get(self):
         rid = int(self.request.get('d'))
 
@@ -61,20 +75,21 @@ class ViewNews(webapp2.RequestHandler):
         template_values = {
             'news': news,
             'comments': comments,
-            'news_id': rid
+            'news_id': rid,
+            'name': self.session.get('username')
         }
 
         template = JINJA_ENVIRONMENT.get_template('news_view.html')
         self.response.write(template.render(template_values))
 
-class NewsForm(webapp2.RequestHandler):
+class NewsForm(BaseHandler):
     def get(self):
         template_values = {}
         template = JINJA_ENVIRONMENT.get_template('news_form.html')
         self.response.write(template.render(template_values))
 
 
-class SaveComment(webapp2.RequestHandler):
+class SaveComment(BaseHandler):
     def post(self):
         body  = self.request.get('comment_body')
         author  = self.request.get('author')
@@ -89,13 +104,19 @@ class SaveComment(webapp2.RequestHandler):
 
         self.redirect('/news_view?d='+news_id)
 
+
+config = {}
+config['webapp2_extras.sessions'] = {
+    'secret_key': 'mama-ndesi',
+}
+
 app = webapp2.WSGIApplication([
                                   ('/', MainPage),
                                   ('/save_news', SaveNews),
                                   ('/save_comment', SaveComment),
                                   ('/news_view', ViewNews),
                                   ('/news_form', NewsForm)
-                                  ], debug=True)
+                                  ], debug=True, config=config)
 
 
 
