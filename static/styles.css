@@ -26,3 +26,36 @@ h2 {
     border-top-width: 1px;
     padding: 8px;
 }
+
+.footer > div {
+    padding: 12px 0px;
+    background: #e7e7e7;
+    border-top: 1px solid #e0e0e0;
+    }
+
+.i-menu li:hover {
+    background: rgba(16, 178, 124, 0.12);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

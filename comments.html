@@ -1,0 +1,37 @@
+{% for item in comments %}
+<div>
+    <p>{{ item.body }}</p>
+</div>
+{% endfor %}
+
+
+{% autoescape true %}
+
+<!-- comments form  -->
+
+<form class="form-horizontal" role="form" action="/save_comment" method="post">
+
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="comment_body">Comment:</label>
+        <div class="col-sm-10">
+            <textarea name="comment_body" id="comment_body"></textarea>
+        </div>
+    </div>
+
+    <input type="hidden" name="author" value="User">
+    <input type="hidden" name="news_id" value="{{ news_id }}">
+
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="submit"></label>
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary" id="submit">
+                SUBMIT
+            </button>
+        </div>
+    </div>
+</form>
+
+
+
+
+{% endautoescape %}

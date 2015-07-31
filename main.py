@@ -26,10 +26,12 @@ DEFAULT_GUESTBOOK_NAME = 'default_guestbook'
 def guestbook_key(guestbook_name=DEFAULT_GUESTBOOK_NAME):
     return ndb.Key('Guestbook', guestbook_name)
 
+def iRandom():
+    return randint(100000,999999)
 
 
 class MainPage(webapp2.RequestHandler):
-    NEWS_TO_QUERY = 4;
+    NEWS_TO_QUERY = 6
     def get(self):
         start_at = self.request.get('start')
         start_at = 0 if (not start_at) else int(start_at)#if start not number janga
@@ -50,18 +52,16 @@ class MainPage(webapp2.RequestHandler):
 
 class ViewNews(webapp2.RequestHandler):
     def get(self):
-        d = self.request.get('d')
-        try:
-            #backward compatibility
-            date = datetime.strptime(d, '%Y-%m-%d_%H:%M:%S')#2014-10-18_03:55:56
-        except:
-            date = datetime.strptime(d, '%Y-%m-%d_%H:%M:%S.%f')#2014-10-18_03:55:56
-            pass
+        rid = int(self.request.get('d'))
 
-        news = News.query(News.date == date).fetch(1)
+        news = News.query(News.rId == rid).fetch(1)
+        comments = Comment.query(Comment.news_id == rid).\
+            order(-Comment.date).fetch(limit=16)
 
         template_values = {
-            'news': news
+            'news': news,
+            'comments': comments,
+            'news_id': rid
         }
 
         template = JINJA_ENVIRONMENT.get_template('news_view.html')
@@ -77,9 +77,25 @@ class NewsForm(webapp2.RequestHandler):
         self.response.write(template.render(template_values))
 
 
+class SaveComment(webapp2.RequestHandler):
+    def post(self):
+        body  = self.request.get('comment_body')
+        author  = self.request.get('author')
+        news_id  = self.request.get('news_id')
+
+        if body and author:
+            c = Comment()
+            c.author = author
+            c.body = body
+            c.news_id = int(news_id)
+            c.put()
+
+        self.redirect('/news_view?d='+news_id)
+
 app = webapp2.WSGIApplication([
                                   ('/', MainPage),
                                   ('/save_news', SaveNews),
+                                  ('/save_comment', SaveComment),
                                   ('/news_view', ViewNews),
                                   ('/news_form', NewsForm)
                                   ], debug=True)
