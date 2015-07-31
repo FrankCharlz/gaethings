@@ -31,7 +31,7 @@ def iRandom():
 
 
 class MainPage(webapp2.RequestHandler):
-    NEWS_TO_QUERY = 2
+    NEWS_TO_QUERY = 6
     def get(self):
         start_at = self.request.get('start')
         start_at = 0 if (not start_at) else int(start_at)#if start not number janga
