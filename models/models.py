@@ -21,6 +21,6 @@ class User(ndb.Model):
     name = ndb.StringProperty()
     email = ndb.StringProperty()
     password = ndb.StringProperty()
-    level = ndb.IntegerProperty()
+    level = ndb.IntegerProperty(default=0)
     profile_photo_key = ndb.BlobKeyProperty()
     date = ndb.DateTimeProperty(auto_now_add=True)

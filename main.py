@@ -5,8 +5,10 @@ import jinja2
 import webapp2
 from google.appengine.ext import ndb
 from webapp2_extras import sessions
+from base import BaseHandler
 
 from handlers.save_news import SaveNews
+from handlers.user_operations import *
 from models.models import News
 from models.models import Comment
 
@@ -15,23 +17,6 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
-
-class BaseHandler(webapp2.RequestHandler):
-    def dispatch(self):
-        # Get a session store for this request.
-        self.session_store = sessions.get_store(request=self.request)
-
-        try:
-            # Dispatch the request.
-            webapp2.RequestHandler.dispatch(self)
-        finally:
-            # Save all sessions.
-            self.session_store.save_sessions(self.response)
-
-    @webapp2.cached_property
-    def session(self):
-        # Returns a session using the default cookie key.
-        return self.session_store.get_session()
 
 DEFAULT_GUESTBOOK_NAME = 'default_guestbook'
 
@@ -63,7 +48,6 @@ class MainPage(BaseHandler):
         self.response.write(template.render(template_values))
 
 
-
 class ViewNews(BaseHandler):
     def get(self):
         rid = int(self.request.get('d'))
@@ -81,6 +65,13 @@ class ViewNews(BaseHandler):
 
         template = JINJA_ENVIRONMENT.get_template('news_view.html')
         self.response.write(template.render(template_values))
+
+class ViewLoginRegister(BaseHandler):
+    def get(self):
+        template_values = {}
+        template = JINJA_ENVIRONMENT.get_template('login_register.html')
+        self.response.write(template.render(template_values))
+
 
 class NewsForm(BaseHandler):
     def get(self):
@@ -115,7 +106,10 @@ app = webapp2.WSGIApplication([
                                   ('/save_news', SaveNews),
                                   ('/save_comment', SaveComment),
                                   ('/news_view', ViewNews),
-                                  ('/news_form', NewsForm)
+                                  ('/news_form', NewsForm),
+                                  ('/login_register', ViewLoginRegister),
+                                  ('/login_user', LoginUser),
+                                  ('/register_user', RegisterUser)
                                   ], debug=True, config=config)
 
 

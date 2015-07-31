@@ -1,12 +1,8 @@
-import urllib
 
-import jinja2
 import webapp2
 import json
 from random import randint
 
-from google.appengine.ext import ndb
-from google.appengine.ext import blobstore
 
 from datetime import datetime
 from models.models import News

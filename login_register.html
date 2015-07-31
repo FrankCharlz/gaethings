@@ -10,16 +10,31 @@
 
 <div class="container">
 
-    <div class="col-md-6">
-        {% include 'login_form.html' %}
+    <div class="col-md-6 hii-hapa">
+        <h2>Login for more features</h2>
+        {% include 'form_login.html' %}
     </div>
 
 
-    <div class="col-md-6">
-        {% include 'register_form.html' %}
+    <div class="col-md-6 hii-hapa" style="
+    background: rgba(211, 230, 228, 0.15);
+    border: 1px solid #e0e0e0;">
+        <h2>Not a member yet? Join the team</h2>
+        {% include 'form_register.html' %}
     </div>
 
 </div>
+
+<style type="text/css">
+    .hii-hapa { padding: 20px;}
+    .hii-hapa > h2 {
+    text-align: center;
+    margin: 32px auto;
+    font-weight: 300;
+    font-size: 25px;
+    }
+</style>
+
 {% include 'footer.html' %}
 </body>
 </html>
