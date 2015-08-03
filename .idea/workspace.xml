@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7881f758-5dbd-446e-b3ed-d15119794f2e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/comments-form.html" afterPath="$PROJECT_DIR$/comments-form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/footer.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="myvastev2.iws" />
@@ -93,11 +93,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="comments-form.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="comments-form.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/comments-form.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.06926407" vertical-offset="0" max-vertical-offset="693">
-              <caret line="3" column="39" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
+            <state vertical-scroll-proportion="-5.12" vertical-offset="0" max-vertical-offset="224">
+              <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="footer.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/footer.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.09235209" vertical-offset="0" max-vertical-offset="693">
+              <caret line="4" column="9" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -145,6 +155,7 @@
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/models/models.py" />
         <option value="$PROJECT_DIR$/comments-form.html" />
+        <option value="$PROJECT_DIR$/footer.html" />
       </list>
     </option>
   </component>
@@ -214,6 +225,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Frank UDICTI\Developer\gaethings_project" />
       <recent name="C:\Users\CharlesMagoti\Desktop\myvastev2" />
       <recent name="C:\Users\CharlesMagoti\Desktop\myvastev2\static" />
     </key>
@@ -498,7 +510,8 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="From another pc" />
-    <option name="LAST_COMMIT_MESSAGE" value="From another pc" />
+    <MESSAGE value="From desktop" />
+    <option name="LAST_COMMIT_MESSAGE" value="From desktop" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -865,8 +878,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/comments-form.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06926407" vertical-offset="0" max-vertical-offset="693">
-          <caret line="3" column="39" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
+        <state vertical-scroll-proportion="-5.12" vertical-offset="0" max-vertical-offset="224">
+          <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/footer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09235209" vertical-offset="0" max-vertical-offset="693">
+          <caret line="4" column="9" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
           <folding />
         </state>
       </provider>
