@@ -9,7 +9,7 @@ import json
 from google.appengine.ext import ndb
 from google.appengine.ext import blobstore
 from datetime import datetime
-from lanora import SaveNews
+from save_news import SaveNews
 
 from models.models import News
 from models.models import Comment
