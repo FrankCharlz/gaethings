@@ -17,8 +17,8 @@ def emailExists(email):
 
 class RegisterUser(BaseHandler):
     def post(self):
-        username = self.request.get('username')
-        email = self.request.get('email')
+        username = self.request.get('username').strip().lower()
+        email = self.request.get('email').strip().lower()
         password = self.request.get('password')
 
         response = {}
@@ -40,7 +40,7 @@ class RegisterUser(BaseHandler):
             user.name = username
             user.email = email
             user.password = password
-            user.id = randint(100000,999999)
+            user.id = randint(100,999999)
             key = user.put()
 
             response['success'] = 1
@@ -48,16 +48,16 @@ class RegisterUser(BaseHandler):
 
             self.session['username'] = username
             self.session['email'] = email
+            self.session['level'] = 0
 
         self.response.write(json.dumps(response))
         self.redirect('/')
 
 class LoginUser(BaseHandler):
     def post(self):
-        username_or_email = self.request.get('username_or_email')
+        username_or_email = self.request.get('username_or_email').strip().lower()
         password = self.request.get('password')
 
-        self.response.headers['Content-Type'] = 'application/json'
         response = {}
 
         if (not username_or_email) or (not password):
@@ -67,31 +67,31 @@ class LoginUser(BaseHandler):
         else:
             result = User.query(
                 ndb.AND(
-                ndb.OR(User.email == username_or_email, User.name == username_or_email),
-                User.password == password)
+                    ndb.OR(User.email == username_or_email,
+                           User.name == username_or_email
+                    ),
+                    User.password == password)
             )
 
             response['success'] = result.count() # 0 = failed to get any
 
+            if not response['success'] :
+                self.redirect('/login_register?success=0')
+                return  #break out of the function
+
             for u in result:
-                response['username'] = u.name
-                response['email'] = u.email
-                response['level'] = u.level
                 self.session['username'] = u.name
                 self.session['email'] = u.email
                 self.session['level'] = u.level
                 break #only one result needed
 
-
-        self.response.write(json.dumps(response))
         origin = str(self.request.get('origin'))
         self.redirect(origin)
 
 
 class LogOut(BaseHandler):
     def get(self):
-        self.session['username'] = 'out'
-        self.session['level'] = -1
+        self.session.clear()
         self.redirect(self.request.referer)
 
 

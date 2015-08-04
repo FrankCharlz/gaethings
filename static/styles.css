@@ -43,13 +43,14 @@ h2 {
 /* News view styles  -------------------------------------------------- */
 
 .by-line {
+    font-size: 14px;
     font-weight: 300;
     color: #106B4D;
     font-style: italic;
     }
 
 .by-line > span {
-    font-weight: 400;
+    font-weight: 600;
     color: #106B4D;
     text-decoration: none;
     }
@@ -59,7 +60,7 @@ h2 {
     margin-top: 8px;
     padding-top: 12px;
 }
-hyf
+
 .news-body img {
     width: 100% !important;
 }
@@ -83,10 +84,10 @@ hyf
     }
 
 
-
-
-
-
+/********  danger zone
+@media (max-width: 767px) .navbar-nav > li > a {padding-top:25px !important; padding-bottom:25px !important;}
+.navbar-brand {display: table-cell !important; vertical-align: middle!important;}
+************/
 
 
 

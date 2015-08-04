@@ -1,3 +1,5 @@
+from datetime import datetime
+
 __author__ = 'CharlesMagoti'
 import os
 from webapp2_extras import sessions
@@ -6,12 +8,28 @@ import webapp2
 import jinja2
 from jinja2 import Environment
 
+def muda_ulopita(d):
+    ct = datetime.now()
+    seconds = int((ct - d).total_seconds())
+    if seconds > 3600 * 24 * 7:
+        return ''
+    elif seconds > 3600 * 24 :
+        return ' | <b>'+str(seconds//3600//24)+' days </b>'
+    elif seconds > 3600:
+        return ' | <b>'+str(seconds//3600)+'h </b>'
+    elif seconds > 60:
+        return ' | <b>'+str(seconds//60)+'m </b>'
+    else:
+        return ' | <b>'+str(seconds)+'s </b>'
+
+
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
+JINJA_ENVIRONMENT.filters['muda_ulopita'] = muda_ulopita
 
 class BaseHandler(webapp2.RequestHandler):
 
