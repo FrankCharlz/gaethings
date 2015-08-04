@@ -18,17 +18,21 @@ class MainPage(BaseHandler):
     NEWS_TO_QUERY = 6
     def get(self):
 
+        #session hack
+        if not self.session :
+            self.session['username'] = 'out'
+            self.session['level'] = -1
+
         start_at = self.request.get('start')
         start_at = 0 if (not start_at) else int(start_at)#if start not number janga
         start_at = 0 if (start_at < 0) else start_at #if start is negative
 
         news = News.query().order(-News.date).fetch(offset=start_at, limit=self.NEWS_TO_QUERY)
-        self.session['test'] = 535456;
+
         template_values = {
             'news': news,
             'next_story': (start_at + self.NEWS_TO_QUERY),
-            'prev_story': (start_at - self.NEWS_TO_QUERY),
-            'moo': self.session.get('test')
+            'prev_story': (start_at - self.NEWS_TO_QUERY)
         }
 
         template = JINJA_ENVIRONMENT.get_template('index.html')
@@ -40,7 +44,7 @@ class ViewNews(BaseHandler):
         rid = int(self.request.get('d'))
 
         news = News.query(News.rId == rid).fetch(1)
-        comments = Comment.query(Comment.news_id == rid).\
+        comments = Comment.query(Comment.news_id == rid). \
             order(-Comment.date).fetch(limit=16)
 
         template_values = {
@@ -85,7 +89,7 @@ class SaveComment(BaseHandler):
 config = {}
 config['webapp2_extras.sessions'] = {
     'secret_key': 'mama-ndesi',
-}
+    }
 
 app = webapp2.WSGIApplication([
                                   ('/', MainPage),
@@ -97,7 +101,7 @@ app = webapp2.WSGIApplication([
                                   ('/login_user', LoginUser),
                                   ('/register_user', RegisterUser),
                                   ('/logout', LogOut)
-                                  ], debug=True, config=config)
+                              ], debug=True, config=config)
 
 
 

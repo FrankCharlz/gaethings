@@ -6,6 +6,7 @@
 </head>
 
 <body>
+{% include 'nav.html' %}
 
 <div class="container">
 
@@ -13,11 +14,11 @@
         {% for item in news %}
         <div>
             <a href='/news_view?d={{item.rId}}'><h2>{{ item.title|title }}</h2></a>
-            <p>{{ item.body|striptags|truncate(320)}}</p>
+            <p>{{ item.body|striptags|truncate(270)}}</p>
         </div>
         {% endfor %}
 
-         <p class="text-center my-pagination">
+        <p class="text-center my-pagination">
             <a href="/?start={{prev_story}}">Previous Stories</a> |
             <a href="/?start={{next_story}}">Next Stories</a>
         </p>
