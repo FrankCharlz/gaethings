@@ -10,6 +10,7 @@ url_mappings = [
     ('/news_view', ViewNews),
     ('/news_form', NewsForm),
     ('/login_user', LoginUser),
+    ('/login_register', ViewLoginRegister),
     ('/register_user', RegisterUser),
     ('/logout', LogOut),
     ('/events', ComingSoon),
