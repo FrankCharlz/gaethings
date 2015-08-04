@@ -14,7 +14,7 @@
         <div>
             <h2>{{ item.title|title }}</h2>
             <span class="by-line">
-            by  <span>{{item.author}}</span> | <span>{{ item.date.strftime('%B %d, %Y %H:%M')}}</span>
+            by  <span>{{item.author}}</span> | <span>{{ item.date.strftime('%B %d, %Y at %H:%M')}}</span>
             </span>
             <p class="news-body">{{ item.body|safe}}</p>
             <p class="news-tags"><code>#{{item.tags}}</code></p>

@@ -29,14 +29,14 @@ h2 {
 }
 
 .footer > div {
-    padding: 12px 0px;
+    padding: 12px;
     background: #e7e7e7;
     border-top: 1px solid #e0e0e0;
     }
 
 .i-menu li:hover {
     color: #000;
-    background: rgba(16, 178, 124, 0.1);
+    background: rgba(16, 178, 124, 0.05);
 }
 
 .by-line {
@@ -46,7 +46,7 @@ h2 {
     }
 
 .by-line > span {
-    font-weight: 600;
+    font-weight: 400;
     color: #106B4D;
     text-decoration: none;
     }

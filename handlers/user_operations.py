@@ -21,7 +21,6 @@ class RegisterUser(BaseHandler):
         email = self.request.get('email')
         password = self.request.get('password')
 
-        self.response.headers['Content-Type'] = 'application/json'
         response = {}
 
         if (not username) or (not email) or (not password):
@@ -85,7 +84,8 @@ class LoginUser(BaseHandler):
 
 
         self.response.write(json.dumps(response))
-        self.redirect('/')
+        origin = str(self.request.get('origin'))
+        self.redirect(origin)
 
 
 class LogOut(BaseHandler):

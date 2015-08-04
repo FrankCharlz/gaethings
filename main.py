@@ -57,16 +57,18 @@ class ViewNews(BaseHandler):
 
 class ViewLoginRegister(BaseHandler):
     def get(self):
-        template_values = {}
+        template_values = {
+            'origin': str(self.request.referer)
+        }
         template = JINJA_ENVIRONMENT.get_template('login_register.html')
         self.response.write(template.render(template_values))
 
 
 class NewsForm(BaseHandler):
     def get(self):
-        template_values = {}
+        #template_values = {}
         template = JINJA_ENVIRONMENT.get_template('news_form.html')
-        self.response.write(template.render(template_values))
+        self.response.write(template.render())
 
 class SaveComment(BaseHandler):
     def post(self):

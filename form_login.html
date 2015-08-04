@@ -1,4 +1,4 @@
-<form action="/login_user" method="post" enctype="multipart/form-data" class="form-horizontal">
+<form action="/login_user?origin={{ origin }}" method="post" enctype="multipart/form-data" class="form-horizontal">
 
     <div class="form-group">
         <label for="ue" class="col-sm-3 control-label">Username or email</label>
@@ -14,7 +14,6 @@
             <input type="password" class="form-control" id="inputPassword30" placeholder="Password" name="password">
         </div>
     </div>
-
 
     <div class="form-group">
         <div class="col-sm-offset-3 col-sm-9">
