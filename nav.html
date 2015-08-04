@@ -1,29 +1,49 @@
 
 
 
-    <!-- Static navbar -->
-    <nav class="navbar navbar-default navbar-static-top">
-      <div class="container">
+<!-- Static navbar -->
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
 
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button><!--kwa ajili ya kile kiicon chetu-->
-          <a class="navbar-brand" href="/">MYVASTE</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button><!--kwa ajili ya kile kiicon chetu-->
+            <a class="navbar-brand" href="/">MYVASTE</a>
         </div>
 
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right i-menu">
-            <li  class="active"><a href="/">News</a></li>
-            <li><a href="/events">Events<span class="sr-only">(current)</span></a></li>
-            <li><a href="/posters">Posters</a></li>
-            <li><a href="/login_register">Login </a></li>
-          </ul>
+            <ul class="nav navbar-nav navbar-right i-menu">
+                <li  class="active"><a href="/">News</a></li>
+                <li><a href="/events">Events<span class="sr-only">(current)</span></a></li>
+                <li><a href="/posters">Posters</a></li>
+                <li>
+                    {% if not session['username'] == '' %}
+                        {% if session['level'] < 2 %} {# normal user #}
+                        <a href="/profile">Profile</a>
+                        {% else %}
+                        <a href="/console">Admin Console</a>
+                        {% endif %}
+                    {% endif %}
+                </li>
+                <li>
+                    {% if session['username'] == '' %}
+
+                    <a href="/login_register">Login</a>
+                    {% else %}
+
+                    <a href="/logout">
+                        Logout <b><u>{{ session['username'] }}</u></b>
+                    </a>
+
+                    {% endif %}
+                </li>
+            </ul>
         </div>
 
-      </div>
-    </nav>
+    </div>
+</nav>
 

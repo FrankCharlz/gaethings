@@ -88,9 +88,11 @@ class LoginUser(BaseHandler):
         self.redirect('/')
 
 
-
-
-
+class LogOut(BaseHandler):
+    def get(self):
+        self.session['username'] = ''
+        self.session['level'] = -1
+        self.redirect(self.request.referer)
 
 
 

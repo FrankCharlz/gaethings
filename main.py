@@ -1,30 +1,22 @@
 import os
 from random import randint
 
-import jinja2
-from jinja2 import Environment
-
 import webapp2
 from google.appengine.ext import ndb
 from webapp2_extras import sessions
-from base import BaseHandler
+from base import BaseHandler, JINJA_ENVIRONMENT
 
 from handlers.save_news import SaveNews
 from handlers.user_operations import *
 from models.models import News
 from models.models import Comment
 
-JINJA_ENVIRONMENT = jinja2.Environment(
-    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
-    extensions=['jinja2.ext.autoescape'],
-    autoescape=True)
+
 
 
 class MainPage(BaseHandler):
     NEWS_TO_QUERY = 6
     def get(self):
-
-        JINJA_ENVIRONMENT.globals['session'] = self.session_store.get_session()
 
         start_at = self.request.get('start')
         start_at = 0 if (not start_at) else int(start_at)#if start not number janga
@@ -74,7 +66,6 @@ class NewsForm(BaseHandler):
         template = JINJA_ENVIRONMENT.get_template('news_form.html')
         self.response.write(template.render(template_values))
 
-
 class SaveComment(BaseHandler):
     def post(self):
         body  = self.request.get('comment_body')
@@ -104,7 +95,8 @@ app = webapp2.WSGIApplication([
                                   ('/news_form', NewsForm),
                                   ('/login_register', ViewLoginRegister),
                                   ('/login_user', LoginUser),
-                                  ('/register_user', RegisterUser)
+                                  ('/register_user', RegisterUser),
+                                  ('/logout', LogOut)
                                   ], debug=True, config=config)
 
 
