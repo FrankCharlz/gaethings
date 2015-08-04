@@ -5,14 +5,14 @@ class News(ndb.Model):
     rId = ndb.IntegerProperty()
     title = ndb.StringProperty()
     body = ndb.TextProperty()
-    tags = ndb.StringProperty()
+    tags = ndb.StringProperty(indexed=False)
     author = ndb.StringProperty()
-    date = ndb.DateTimeProperty(auto_now_add=True)#date serves as id, screwing things
+    date = ndb.DateTimeProperty(auto_now_add=True)
 
 class Comment(ndb.Model):
     body = ndb.TextProperty()
-    author = ndb.StringProperty()
-    news_id = ndb.IntegerProperty()#saves as key to link with news entry
+    author = ndb.StringProperty(indexed=False)
+    news_id = ndb.IntegerProperty()
     date = ndb.DateTimeProperty(auto_now_add=True)
 
 

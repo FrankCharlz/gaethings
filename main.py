@@ -34,18 +34,18 @@ class MainPage(BaseHandler):
 
 class ViewNews(BaseHandler):
     def get(self):
-        rid = int(self.request.get('d'))
+        id = int(self.request.get('d'))
 
-        news = News.query(News.rId == rid).fetch(limit=1)
+        news = News.get_by_id(id);
 
-        comments = Comment.query(Comment.news_id == rid). \
+        comments = Comment.query(Comment.news_id == news.rId). \
             order(-Comment.date).fetch(limit=16)
 
         template_values = {
             'news': news,
             'comments': comments,
-            'news_id': rid,
-            'name': self.session.get('username')
+            'news_id': id,
+            'name': self.session.get('username'),
         }
 
         template = JINJA_ENVIRONMENT.get_template('news_view.html')
@@ -54,7 +54,8 @@ class ViewNews(BaseHandler):
 class ViewLoginRegister(BaseHandler):
     def get(self):
         template_values = {
-            'origin': str(self.request.referer)
+            'origin': str(self.request.referer),
+            'fail': self.request.get('fail')
         }
         template = JINJA_ENVIRONMENT.get_template('login_register.html')
         self.response.write(template.render(template_values))

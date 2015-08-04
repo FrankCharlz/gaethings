@@ -29,18 +29,22 @@ class RegisterUser(BaseHandler):
 
         elif emailExists(email):
             response['success'] = 0
-            response['message'] = 'Email already used'
+            response['message'] = 'Registration failed, Email already in use'
+            self.redirect('/login_register?fail='+response['message'])
+            return
 
         elif userExists(username):
             response['success'] = 0
-            response['message'] = 'Username already in use'
+            response['message'] = 'Registration failed, Username already in use'
+            self.redirect('/login_register?fail='+response['message'])
+            return
 
         else:
             user = User()
             user.name = username
             user.email = email
             user.password = password
-            user.id = randint(100,999999)
+            user.id = randint(1,1000000)
             key = user.put()
 
             response['success'] = 1
@@ -76,7 +80,7 @@ class LoginUser(BaseHandler):
             response['success'] = result.count() # 0 = failed to get any
 
             if not response['success'] :
-                self.redirect('/login_register?success=0')
+                self.redirect('/login_register?fail=L')
                 return  #break out of the function
 
             for u in result:
@@ -86,6 +90,7 @@ class LoginUser(BaseHandler):
                 break #only one result needed
 
         origin = str(self.request.get('origin'))
+        #if not origin: origin = '/'
         self.redirect(origin)
 
 

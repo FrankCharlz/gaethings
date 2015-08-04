@@ -12,6 +12,9 @@
 
     <div class="col-md-6 hii-hapa">
         <h2>Login for more features</h2>
+        {% if fail == 'L' %}
+        <p class="alert alert-danger">Wrong user name or password! Try again...</p>
+        {% endif %}
         {% include 'form_login.html' %}
     </div>
 
@@ -20,6 +23,9 @@
     background: rgba(211, 230, 228, 0.15);
     border: 1px solid #e0e0e0;">
         <h2>Not a member yet? Join the team</h2>
+        {% if 'Registration' in fail %}
+        <p class="alert alert-danger">{{fail}}</p>
+        {% endif %}
         {% include 'form_register.html' %}
     </div>
 

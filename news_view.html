@@ -10,18 +10,17 @@
 
 <div class="container">
     <div class="col-md-7 col-xs-12 news-view">
-        {% for item in news %}
         <div>
-            <h2>{{ item.title|title }}</h2>
+            <h2>{{ news.title|title }}</h2>
             <span class="by-line">
-            by  <span>{{item.author}}</span> |
-                {{ item.date.strftime('%B %d, %Y at %H:%M')}} {{ item.date|muda_ulopita|safe}}
+            by  <span>{{news.author|title}}</span> |
+                {{ news.date.strftime('%B %d, %Y at %H:%M')}} {{ news.date|muda_ulopita|safe}}
             </span>
-            <p class="news-body">{{ item.body|safe}}</p>
-            <p class="news-tags"><code>#{{item.tags}}</code></p>
+            <p class="news-body">{{ news.body|safe}}</p>
+            <p class="news-tags"><code>#{{news.tags}}</code></p>
         </div>
-        {% endfor %}
 
+        <hr>
         <div class="comments" style="background:#f7f8f6;padding:12px;">
             {% include 'comments.html' %}
         </div>

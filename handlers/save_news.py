@@ -5,10 +5,11 @@ from random import randint
 
 
 from datetime import datetime
+from base import BaseHandler
 from models.models import News
 
 
-class SaveNews(webapp2.RequestHandler):
+class SaveNews(BaseHandler):
     def post(self):
         title = self.request.get('title')
         body  = self.request.get('news_body')
@@ -26,7 +27,7 @@ class SaveNews(webapp2.RequestHandler):
             n = News();
             n.title = title
             n.body = body
-            n.author = author
+            n.author = self.session.get('username')
             n.tags = tags
             n.rId = randint(0, 999999999)#God doesnt play dice, I do
             n.put()

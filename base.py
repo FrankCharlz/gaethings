@@ -22,6 +22,9 @@ def muda_ulopita(d):
     else:
         return ' | <b>'+str(seconds)+'s </b>'
 
+def get_id(entity):
+    #return the auto-generated entity id..
+    return entity.key.id()
 
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -30,6 +33,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     autoescape=True)
 
 JINJA_ENVIRONMENT.filters['muda_ulopita'] = muda_ulopita
+JINJA_ENVIRONMENT.filters['get_id'] = get_id
 
 class BaseHandler(webapp2.RequestHandler):
 
