@@ -45,9 +45,13 @@ class RegisterUser(BaseHandler):
             key = user.put()
 
             response['success'] = 1
-            response['message'] = 'id:'+str(user.id)+',key:'+str(key)
+            response['message'] = 'id:'+str(user.id)+', '+str(key)
+
+            self.session['username'] = username
+            self.session['email'] = email
 
         self.response.write(json.dumps(response))
+        self.redirect('/')
 
 class LoginUser(BaseHandler):
     def post(self):
@@ -57,24 +61,39 @@ class LoginUser(BaseHandler):
         self.response.headers['Content-Type'] = 'application/json'
         response = {}
 
-        username = ''
-        email = ''
-
         if (not username_or_email) or (not password):
             response['success'] = 0
             response['message'] = 'Field(s) empty'
 
-        elif '@' in username_or_email:
-            #it is an email...
-            email = username_or_email
-            response['email'] = email
-            query = User.query(ndb.AND(User.email == email, User.password == password))
-            response['success'] = query.count()
         else:
-            #it is a user name
-            username = username_or_email
-            response['username'] = username
-            query = User.query(ndb.AND(User.name == username, User.password == password))
-            response['success'] = query.count()
+            result = User.query(
+                ndb.AND(
+                ndb.OR(User.email == username_or_email, User.name == username_or_email),
+                User.password == password)
+            )
+
+            response['success'] = result.count() # 0 = failed to get any
+
+            for u in result:
+                response['username'] = u.name
+                response['email'] = u.email
+                response['level'] = u.level
+                self.session['username'] = u.name
+                self.session['email'] = u.email
+                self.session['level'] = u.level
+                break #only one result needed
+
 
         self.response.write(json.dumps(response))
+        self.redirect('/')
+
+
+
+
+
+
+
+
+
+
+

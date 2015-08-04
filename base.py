@@ -3,7 +3,6 @@ __author__ = 'CharlesMagoti'
 from webapp2_extras import sessions
 import webapp2
 
-
 class BaseHandler(webapp2.RequestHandler):
     def dispatch(self):
         # Get a session store for this request.
@@ -20,3 +19,4 @@ class BaseHandler(webapp2.RequestHandler):
     def session(self):
         # Returns a session using the default cookie key.
         return self.session_store.get_session()
+

@@ -2,6 +2,8 @@ import os
 from random import randint
 
 import jinja2
+from jinja2 import Environment
+
 import webapp2
 from google.appengine.ext import ndb
 from webapp2_extras import sessions
@@ -18,31 +20,24 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     autoescape=True)
 
 
-DEFAULT_GUESTBOOK_NAME = 'default_guestbook'
-
-def guestbook_key(guestbook_name=DEFAULT_GUESTBOOK_NAME):
-    return ndb.Key('Guestbook', guestbook_name)
-
-def iRandom():
-    return randint(100000,999999)
-
-
 class MainPage(BaseHandler):
     NEWS_TO_QUERY = 6
     def get(self):
+
+        JINJA_ENVIRONMENT.globals['session'] = self.session_store.get_session()
+
         start_at = self.request.get('start')
         start_at = 0 if (not start_at) else int(start_at)#if start not number janga
         start_at = 0 if (start_at < 0) else start_at #if start is negative
 
         news = News.query().order(-News.date).fetch(offset=start_at, limit=self.NEWS_TO_QUERY)
-
+        self.session['test'] = 535456;
         template_values = {
             'news': news,
             'next_story': (start_at + self.NEWS_TO_QUERY),
-            'prev_story': (start_at - self.NEWS_TO_QUERY)
+            'prev_story': (start_at - self.NEWS_TO_QUERY),
+            'moo': self.session.get('test')
         }
-
-        self.session['username'] = 'Frank Charlz'
 
         template = JINJA_ENVIRONMENT.get_template('index.html')
         self.response.write(template.render(template_values))
