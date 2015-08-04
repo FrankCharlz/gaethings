@@ -6,7 +6,7 @@ from webapp2_extras import sessions
 import webapp2
 
 import jinja2
-from jinja2 import Environment
+from jinja2 import Environment, PackageLoader
 
 def muda_ulopita(d):
     ct = datetime.now()
@@ -28,7 +28,8 @@ def get_id(entity):
 
 
 JINJA_ENVIRONMENT = jinja2.Environment(
-    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
+    loader=PackageLoader('templates', ''),
+    #loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 

@@ -36,15 +36,15 @@ h2 {
 
 .i-menu li:hover {
     color: #000;
-    background: rgba(16, 178, 124, 0.05);
+    background: rgba(16, 178, 124, 0.25);
 }
 
 
-/*************** FOR LARGE DEVICES ONLY ************************/
+/*************** MENU  FOR LARGE DEVICES ONLY ************************/
 @media screen and (min-width: 700px) {
     .navbar a {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 12px;
+    margin-bottom: 12px;
     }
 
     .navbar .divider-vertical a:first-child {
@@ -109,8 +109,7 @@ h2 {
 /******** space btn footer nd end of doc **********/
 .up-footer {margin: 30px auto;}
 
-
-
+.navbar-brand { color: #10b27c; }
 
 
 
