@@ -12,8 +12,6 @@ from models.models import News
 from models.models import Comment
 
 
-
-
 class MainPage(BaseHandler):
     NEWS_TO_QUERY = 6
     def get(self):
