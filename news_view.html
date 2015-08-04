@@ -21,7 +21,8 @@
         </div>
 
         <hr>
-        <div class="comments" style="background:#f7f8f6;padding:12px;">
+        <button onclick="hideComments()" class="button btn-hide-comments">SHOW COMMENTS</button>
+        <div class="comments" style="background:#f8f8f8;padding:16px;display:none;">
             {% include 'comments.html' %}
         </div>
     </div>

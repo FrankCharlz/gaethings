@@ -14,6 +14,10 @@
         {% for item in news %}
         <div>
             <a href='/news_view?d={{ item|get_id }}'><h2>{{ item.title|title }}</h2></a>
+            <span class="by-line">
+            by  <span>{{item.author|title}}</span> |
+                {{ item.date.strftime('%B %d, %Y at %H:%M')}} {{ item.date|muda_ulopita|safe}}
+            </span>
             <p>{{ item.body|striptags|truncate(270)}}</p>
         </div>
         {% endfor %}

@@ -46,7 +46,7 @@ class ViewNews(BaseHandler):
             'comments': comments,
             'news_id': id,
             'name': self.session.get('username'),
-        }
+            }
 
         template = JINJA_ENVIRONMENT.get_template('news_view.html')
         self.response.write(template.render(template_values))
@@ -84,21 +84,35 @@ class SaveComment(BaseHandler):
 
 
 config = {}
-config['webapp2_extras.sessions'] = {
-    'secret_key': 'mama-ndesi',
-    }
+config['webapp2_extras.sessions'] = { 'secret_key': 'mama-ndesi'}
 
-app = webapp2.WSGIApplication([
-                                  ('/', MainPage),
-                                  ('/save_news', SaveNews),
-                                  ('/save_comment', SaveComment),
-                                  ('/news_view', ViewNews),
-                                  ('/news_form', NewsForm),
-                                  ('/login_register', ViewLoginRegister),
-                                  ('/login_user', LoginUser),
-                                  ('/register_user', RegisterUser),
-                                  ('/logout', LogOut)
-                              ], debug=True, config=config)
+
+class ComingSoon(webapp2.RequestHandler):
+    def get(self):
+        template = JINJA_ENVIRONMENT.get_template('coming_soon.html')
+        self.response.write(template.render())
+
+
+
+url_mappings = [
+    ('/', MainPage),
+    ('/save_news', SaveNews),
+    ('/save_comment', SaveComment),
+    ('/news_view', ViewNews),
+    ('/news_form', NewsForm),
+    ('/login_register', ViewLoginRegister),
+    ('/login_user', LoginUser),
+    ('/register_user', RegisterUser),
+    ('/logout', LogOut),
+    ('/events', ComingSoon),
+    ('/posters', ComingSoon),
+    ('/profile', ComingSoon),
+    ('/console', ComingSoon)
+]
+
+
+
+app = webapp2.WSGIApplication( url_mappings, debug=True, config=config)
 
 
 

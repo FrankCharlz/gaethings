@@ -80,6 +80,14 @@ h2 {
     width: 100% !important;
 }
 
+.coming-soon {
+    font-weight: lighter;
+    font-size: 36px;
+    color: #6F8278;
+    vertical-align: middle;
+    margin-top: 20%;
+}
+
 /* Sticky footer styles  -------------------------------------------------- */
     html {
     position: relative;
@@ -98,18 +106,8 @@ h2 {
     background-color: #f5f5f5;
     }
 
-
-/********  danger zone
-@media (max-width: 767px) .navbar-nav > li > a {padding-top:25px !important; padding-bottom:25px !important;}
-.navbar-brand {display: table-cell !important; vertical-align: middle!important;}
-************/
-
-
-
-
-
-
-
+/******** space btn footer nd end of doc **********/
+.up-footer {margin: 30px auto;}
 
 
 

@@ -37,3 +37,42 @@ function postNews() {
 
 
 }
+
+
+function httpGet(theUrl)
+{
+    var response;
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, true ); //true == async
+    xmlHttp.onreadystatechange=function() {
+        if (xmlHttp.readyState==4 && xmlHttp.status==200) {
+        response = xmlHttp.responseText;
+        alert(response);
+        } else if(xmlHttp.readyState==4 && xmlHttp.status!=200) {
+        response = 'An error occured';
+        alert(response);
+        }
+    }
+    xmlHttp.send(null);
+}
+
+var hidden = true;
+function hideComments() {
+    //httpGet('/logout');
+    if (hidden) {
+        $('.comments').show();
+        $('.btn-hide-comments').text('HIDE COMMENTS');
+    } else {
+        $('.comments').hide();
+        $('.btn-hide-comments').text('SHOW COMMENTS');
+    }
+    hidden = !hidden;
+    console.log(hidden);
+}
+
+$(document).ready(function(){
+
+console.log('document ready');
+
+
+});

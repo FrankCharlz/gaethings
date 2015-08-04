@@ -21,7 +21,7 @@
                 <li><a href="/events">Events<span class="sr-only">(current)</span></a></li>
                 <li><a href="/posters">Posters</a></li>
                 <li class="divider-vertical">
-                    {% if session['username'] is defined %}
+                    {% if (session is defined) and (session['username'] is defined) %}
                     {% if session['level'] < 2 %} {# normal user #}
                     <a href="/profile">Profile</a>
                     {% else %}
@@ -30,7 +30,7 @@
                     {% endif %}
                 </li>
                 <li>
-                    {% if not (session['username'] is defined) %}
+                    {% if (not session is defined) or not (session['username'] is defined) %}
                         <a href="/login_register">Login</a>
                     {% else %}
 
