@@ -39,6 +39,9 @@ h2 {
     background: rgba(16, 178, 124, 0.05);
 }
 
+
+/* News view styles  -------------------------------------------------- */
+
 .by-line {
     font-weight: 300;
     color: #106B4D;
@@ -57,8 +60,11 @@ h2 {
     padding-top: 12px;
 }
 
-/* Sticky footer styles
-    -------------------------------------------------- */
+.news-body img {
+    width: 100% !important;
+}
+
+/* Sticky footer styles  -------------------------------------------------- */
     html {
     position: relative;
     min-height: 100%;
