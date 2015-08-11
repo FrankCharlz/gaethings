@@ -6,6 +6,17 @@
 </head>
 
 <body>
+<!------------- fb sdk -------------------------->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!------------- /fb sdk -------------------------->
+
 {% include 'nav.html' %}
 
 <div class="container">
@@ -14,17 +25,22 @@
             <h2>{{ news.title|title }}</h2>
             <span class="by-line">
             by  <span>{{news.author|title}}</span> |
-                {{ news.date.strftime('%B %d, %Y at %H:%M')}} {{ news.date|muda_ulopita|safe}}
+                {{ (news.date|tarehe).strftime('%B %d, %Y at %H:%M')}} {{ news.date|muda_ulopita|safe}}
             </span>
             <p class="news-body">{{ news.body|safe}}</p>
             <p class="news-tags"><code>#{{news.tags}}</code></p>
         </div>
 
         <hr>
-        <button onclick="hideComments()" class="button btn-hide-comments">SHOW COMMENTS</button>
-        <div class="comments" style="background:#f8f8f8;padding:16px;display:none;">
-            {% include 'comments.html' %}
+
+        <div class="fb-comments" data-href="http://myvastev2.appspot.com/{{news|get_id}}" data-numposts="5">
         </div>
+
+        <!--button onclick="hideComments()" class="button btn-hide-comments">SHOW COMMENTS</button>
+        <div class="comments" style="background:#f8f8f8;padding:16px;display:none;">
+
+            {# include 'comments.html'  #}
+        </div-->
     </div>
 
 

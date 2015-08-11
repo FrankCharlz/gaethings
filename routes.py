@@ -1,13 +1,15 @@
-from api.api import GetNews, GetNewsById
+from api.api import *
 from handlers.handler import *
 from handlers.save_news import *
 from handlers.user_operations import *
 
 url_mappings = [
     ('/', MainPage),
+    ('/news', MainPage),
     ('/save_news', SaveNews),
     ('/save_comment', SaveComment),
-    ('/news_view', ViewNews),
+    ('/news/view/(\d+)', ViewNews), #stupidity
+    ('/news/view', ViewNews),
     ('/news_form', NewsForm),
     ('/login_user', LoginUser),
     ('/login_register', ViewLoginRegister),
@@ -26,4 +28,6 @@ api_routes = [
 ]
 
 
-url_mappings.extend(api_routes);
+url_mappings.extend(api_routes)
+
+#5760616295825408-sample news id..

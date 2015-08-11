@@ -1,8 +1,5 @@
 from base import BaseHandler
-from google.appengine.ext import ndb
-from webapp2_extras import sessions
 from base import *
-from random import randint
 import webapp2
 from models.models import *
 
@@ -27,10 +24,13 @@ class MainPage(BaseHandler):
 
 
 class ViewNews(BaseHandler):
-    def get(self):
-        id = int(self.request.get('d'))
+    def get(self, id = None):
 
-        news = News.get_by_id(id);
+        if not id:
+            self.redirect('/news')
+            return
+
+        news = News.get_by_id(int(id));
 
         comments = Comment.query(Comment.news_id == news.rId). \
             order(-Comment.date).fetch(limit=16)

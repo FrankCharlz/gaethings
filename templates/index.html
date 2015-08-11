@@ -13,7 +13,7 @@
     <div class="col-md-7 col-xs-12 news-list">
         {% for item in news %}
         <div>
-            <a href='/news_view?d={{ item|get_id }}'><h2>{{ item.title|title }}</h2></a>
+            <a href='/news/view/{{ item|get_id }}'><h2>{{ item.title|title }}</h2></a>
             <span class="by-line">
             by  <span>{{item.author|title}}</span> {{ item.date|muda_ulopita|safe}}
             </span>
