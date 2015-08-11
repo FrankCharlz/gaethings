@@ -1,4 +1,4 @@
-from api.api import *
+from api.api_codes import *
 from handlers.handler import *
 from handlers.save_news import *
 from handlers.user_operations import *
@@ -10,15 +10,13 @@ url_mappings = [
     ('/save_comment', SaveComment),
     ('/news/view/(\d+)', ViewNews), #stupidity
     ('/news/view', ViewNews),
-    ('/news_form', NewsForm),
     ('/login_user', LoginUser),
     ('/login_register', ViewLoginRegister),
     ('/register_user', RegisterUser),
     ('/logout', LogOut),
     ('/events', ComingSoon),
     ('/posters', ComingSoon),
-    ('/profile', ComingSoon),
-    ('/console', ComingSoon)
+    ('/profile', ComingSoon)
 ]
 
 
@@ -27,7 +25,13 @@ api_routes = [
     ('/api/get_news_by_id',GetNewsById)
 ]
 
+user_pages = [
+    ('/console', AdminConsole),
+    ('/write_news', WriteNews)
+]
+
 
 url_mappings.extend(api_routes)
+url_mappings.extend(user_pages)
 
 #5760616295825408-sample news id..

@@ -7,7 +7,8 @@ import jinja2
 from jinja2 import Environment, PackageLoader
 
 def muda_ulopita(d):
-    ct = datetime.now() - timedelta(seconds=10800) #taking care of 3 hrs time difference
+    #no need to take care of 3 hrs since is time difference
+    ct = datetime.now()
     seconds = int((ct - d).total_seconds())
     if seconds > 3600 * 24 * 7:
         return ''

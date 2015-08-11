@@ -24,9 +24,9 @@ class MainPage(BaseHandler):
 
 
 class ViewNews(BaseHandler):
-    def get(self, id = None):
+    def get(self, id=0):
 
-        if not id:
+        if id == 0:
             self.redirect('/news')
             return
 
@@ -58,7 +58,7 @@ class ViewLoginRegister(BaseHandler):
 class NewsForm(BaseHandler):
     def get(self):
         #template_values = {}
-        template = JINJA_ENVIRONMENT.get_template('news_form.html')
+        template = JINJA_ENVIRONMENT.get_template('write_news.html')
         self.response.write(template.render())
 
 class SaveComment(BaseHandler):
@@ -81,4 +81,26 @@ class ComingSoon(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('coming_soon.html')
         self.response.write(template.render())
 
+class AdminConsole(webapp2.RequestHandler):
+    def get(self):
+        template = JINJA_ENVIRONMENT.get_template('admin_console.html')
+        self.response.write(template.render())
+
+
+
+class WriteNews(BaseHandler):
+    def get(self):
+        #is user level < 3 cant post sorry
+        if self.session and self.session.get('level') and self.session.get('level') > 3:
+            template = JINJA_ENVIRONMENT.get_template('write_news.html')
+            self.response.write(template.render())
+        else:
+            error_shit(self,"You cannot post shit, Levels baby!")
+
+
+def error_shit(context, message):
+     template_values = { 'message': message }
+     template = JINJA_ENVIRONMENT.get_template('error.html')
+     context.response.write(template.render(template_values))
+    #dont forget to return after calling this so as to stop further execution..
 

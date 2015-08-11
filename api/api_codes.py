@@ -1,5 +1,3 @@
-from _hashlib import new
-
 __author__ = 'CharlesMagoti'
 from google.appengine.ext import ndb
 
