@@ -17,7 +17,7 @@ def muda_ulopita(d):
     elif seconds > 3600 * 24 :
         return ' | <b>'+str(seconds//3600//24)+' day </b>'
     elif seconds > 3600:
-        return ' | <b>'+str(seconds//3600)+'hr'+((seconds%3600)//60)+'min  </b>'
+        return ' | <b>'+str(seconds//3600)+'hr '+str((seconds%3600)//60)+'min  </b>'
     elif seconds > 60:
         return ' | <b>'+str(seconds//60)+'min </b>'
     else:
