@@ -17,7 +17,7 @@ def muda_ulopita(d):
     elif seconds > 3600 * 24 :
         return ' | <b>'+str(seconds//3600//24)+' day </b>'
     elif seconds > 3600:
-        return ' | <b>'+str(seconds//3600)+'hr'+((seconds%3600)//60)+'min  </b>'
+        return ' | <b>'+str(seconds//3600)+'hr'+str((seconds%3600)//60)+'min  </b>'
     elif seconds > 60:
         return ' | <b>'+str(seconds//60)+'min </b>'
     else:
@@ -34,7 +34,6 @@ def tarehe(trh):
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=PackageLoader('templates', ''),
-    #loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
@@ -48,7 +47,7 @@ class BaseHandler(webapp2.RequestHandler):
         # Get a session store for this request.
         self.session_store = sessions.get_store(request=self.request)
 
-        #set env to accept sessions
+        #set jinja environment to accept sessions
         JINJA_ENVIRONMENT.globals['session'] = self.session_store.get_session()
 
         try:
