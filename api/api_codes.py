@@ -58,7 +58,7 @@ def news_to_dict(news, with_body=False):
 
 
 class GetNews(webapp2.RequestHandler):
-    DEFAULT_NEWS_IDADI = 50
+    DEFAULT_NEWS_IDADI = 50 - 1
 
     def get(self):
         self.response.headers['Content-Type'] = 'application/json'
